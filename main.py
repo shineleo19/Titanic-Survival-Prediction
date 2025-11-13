@@ -1,27 +1,33 @@
 import pandas as pd
-import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_squared_error, r2_score
+from sklearn.preprocessing import LabelEncoder
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 
-data = pd.read_csv("dataset/data.csv")
+data = pd.read_csv("titanic.csv")
 
-X = data.drop(["price", "date", "street", "city", "statezip", "country"], axis=1)
-y = data["price"]
+data = data.drop(["PassengerId", "Name", "Ticket", "Cabin"], axis=1, errors='ignore')
+
+data["Age"].fillna(data["Age"].median(), inplace=True)
+data["Embarked"].fillna(data["Embarked"].mode()[0], inplace=True)
+data["Fare"].fillna(data["Fare"].median(), inplace=True)
+
+le = LabelEncoder()
+for col in ["Sex", "Embarked"]:
+    if col in data.columns:
+        data[col] = le.fit_transform(data[col])
+
+data = data.dropna()
+
+X = data.drop("Survived", axis=1)
+y = data["Survived"]
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-model = LinearRegression()
+model = LogisticRegression(max_iter=500)
 model.fit(X_train, y_train)
 y_pred = model.predict(X_test)
 
-print("Mean Squared Error:", mean_squared_error(y_test, y_pred))
-print("R2 Score:", r2_score(y_test, y_pred))
-
-plt.figure(figsize=(8,6))
-plt.scatter(y_test, y_pred, alpha=0.6)
-plt.xlabel("Actual Prices")
-plt.ylabel("Predicted Prices")
-plt.title("Actual vs Predicted House Prices")
-plt.plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()], 'r--')
-plt.show()
+print("Accuracy:", accuracy_score(y_test, y_pred))
+print("\nClassification Report:\n", classification_report(y_test, y_pred))
+print("\nConfusion Matrix:\n", confusion_matrix(y_test, y_pred))

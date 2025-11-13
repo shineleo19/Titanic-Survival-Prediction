@@ -1,55 +1,43 @@
-# 🏠 House Price Prediction
+# 🚢 Titanic Survival Prediction
 
-This project builds a **Linear Regression model** to predict house prices using features such as square footage, number of bedrooms, bathrooms, and more.
-
----
-
-## 📊 Overview
-
-The goal of this project is to understand the relationship between house features and their selling prices, and to predict the price of a house based on its characteristics.
-
-The dataset includes features like:
-- Bedrooms  
-- Bathrooms  
-- Living area (sqft)  
-- Lot area (sqft)  
-- Year built  
-- Location details (city, zip, state)
+This project builds a **Logistic Regression model** to predict passenger survival on the Titanic dataset using machine learning.  
+It includes **data preprocessing, encoding, and model evaluation**.
 
 ---
 
-## ⚙️ Technologies Used
+## 📊 Dataset
+The dataset used is `titanic.csv`, which contains details about Titanic passengers such as age, gender, ticket class, and survival status.
 
-- **Python 3**
-- **Pandas** – data analysis  
-- **NumPy** – numerical computations  
-- **Scikit-learn** – model training and evaluation  
-- **Matplotlib / Seaborn** – data visualization  
-
----
-
-## 🚀 How It Works
-
-1. Load the dataset (e.g., from `data.csv`)
-2. Perform data cleaning and preprocessing
-3. Split the dataset into training and testing sets
-4. Train a **Linear Regression model**
-5. Evaluate model performance using:
-   - Mean Squared Error (MSE)
-   - R² Score
+### Key Columns:
+- `Survived` — Target variable (1 = Survived, 0 = Did not survive)  
+- `Pclass`, `Sex`, `Age`, `Fare`, `Embarked` — Predictor features
 
 ---
 
-## 🧠 Model Workflow
+## ⚙️ Features of the Model
+- Handles missing values using median/mode imputation  
+- Encodes categorical features using Label Encoding  
+- Splits data into training and testing sets  
+- Trains a Logistic Regression classifier  
+- Evaluates model performance using:
+  - Accuracy score  
+  - Confusion matrix  
+  - Classification report  
 
-```plaintext
-Data → Preprocessing → Train/Test Split → Model Training → Evaluation → Predictions
+---
 
-## 🚀 How to Run
+## 🧠 Technologies Used
+- **Python 3.10+**
+- **Pandas**
+- **Scikit-learn**
 
-### 1️⃣ Clone the repository
+---
+
+## 🚀 How to Run the Project
+
+### 1. Clone the Repository
 ```bash
-1.git clone <repo url>
-2.cd house-price-prediction
+1.git clone https://github.com/<your-username>/titanic-survival-prediction.git
+2.cd titanic-survival-prediction
 3.pip install -r requirements.txt
 4.python main.py
