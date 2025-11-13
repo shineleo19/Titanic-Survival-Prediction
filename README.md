@@ -37,7 +37,7 @@ The dataset used is `titanic.csv`, which contains details about Titanic passenge
 
 ### 1. Clone the Repository
 ```bash
-1.git clone https://github.com/<your-username>/titanic-survival-prediction.git
+1.git clone <url>
 2.cd titanic-survival-prediction
 3.pip install -r requirements.txt
 4.python main.py
